@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ana & José - Invitación</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Allura&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent:#c0a080; /* dorado */
+      --navy:#0d1b2a;  /* azul marino */
+    }
+    html,body{height:100%;margin:0;font-family:'Playfair Display',serif;scroll-behavior:smooth;}
+    body{background:url('img/boda3.png') center/cover no-repeat fixed;}
+    #intro{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;text-align:center;backdrop-filter:blur(3px);transition:opacity .6s;z-index:1000;}
+    #intro.hidden{opacity:0;pointer-events:none;}
+    #main{display:none;}
+    .section{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;box-sizing:border-box;text-align:center;backdrop-filter:blur(2px);}  
+
+    /* Animación perdida restaurada */
+    @keyframes fadeInUp{
+      from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}
+    }
+/* ITINERARIO CSS */
+/* ===== ITINERARIO ELEGANTE (azul + dorado de tu invitación) ===== */
+/* Centrar la card del itinerario en la sección */
+.section-itinerario{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.it-card{
+  margin:0 auto;
+}
+
+
+.it-heading{
+  font-family:'Allura', cursive;
+  font-size:clamp(36px,6vw,56px);
+  margin:0 0 18px 0;
+  line-height:1.1;
+  text-align:left;
+  background:linear-gradient(90deg, color-mix(in oklab, var(--accent) 70%, black),
+                                   var(--accent),
+                                   color-mix(in oklab, var(--accent) 90%, white),
+                                   var(--accent));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+.it-grid{
+  display:grid;
+  grid-template-columns:110px 1fr;
+  gap:18px 26px;
+  align-items:start;
+  position:relative;
+}
+
+/* Línea vertical */
+.it-grid::before{
+  content:"";
+  position:absolute; left:110px; top:0; bottom:0;
+  width:2px;
+  background:linear-gradient(
+    color-mix(in oklab, var(--accent) 60%, #000),
+    var(--accent),
+    color-mix(in oklab, var(--accent) 60%, #000)
+  );
+  transform:translateX(13px);
+  opacity:.95;
+}
+
+.it-icon{
+  width:84px; height:84px; border-radius:18px;
+  border:1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  background:linear-gradient(145deg, rgba(255,255,255,.03), rgba(0,0,0,.25));
+  box-shadow:inset 0 0 0 1px rgba(212,175,55,.08), 0 10px 24px rgba(0,0,0,.35);
+}
+
+/* Puntos brillantes sobre la línea */
+.it-icon::after{
+  content:""; position:absolute; right:-23px; top:50%; transform:translateY(-50%);
+  width:12px; height:12px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff, var(--accent) 60%,
+            color-mix(in oklab, var(--accent) 65%, #000));
+  box-shadow:0 0 10px color-mix(in oklab, var(--accent) 80%, #000),
+             0 0 2px var(--accent);
+}
+
+.it-icon svg{ width:44px; height:44px; fill:none; stroke:color-mix(in oklab, var(--accent) 70%, #fff); stroke-width:1.6; }
+
+.it-content h3{
+  font-family:'Playfair Display', serif;
+  font-weight:600;
+  margin:0 0 6px 0;
+  font-size:clamp(18px,2.4vw,24px);
+  letter-spacing:.06em;
+  color:var(--accent);
+  text-transform:uppercase;
+}
+.it-time{ margin:0; font-size:clamp(15px,2vw,18px); color:#fff; }
+
+.it-note{ margin-top:20px; font-size:13px; color:color-mix(in oklab, var(--accent) 70%, #fff); opacity:.9; }
+
+@media (max-width:560px){
+  .it-grid{ grid-template-columns:90px 1fr; gap:16px 18px; }
+  .it-grid::before{ left:90px; transform:translateX(11px); }
+  .it-icon{ width:70px; height:70px; border-radius:14px; }
+  .it-icon svg{ width:36px; height:36px; }
+}
+/* ===== SECCIÓN 6 · CONFIRMA TU ASISTENCIA ===== */
+.rsvp-wrap{
+  display:flex; justify-content:center; align-items:center; padding:24px 0;
+}
+.rsvp-card{
+  width:min(880px,92vw);
+  margin:0 auto;
+  background:rgba(13,27,42,.55);
+  border:1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+  border-radius:22px;
+  padding:34px 22px 28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.03);
+  backdrop-filter:saturate(120%) blur(4px);
+}
+.rsvp-heading{
+  font-family:'Allura',cursive;
+  font-size:clamp(34px,6vw,52px);
+  margin:0 0 10px; line-height:1.1;
+  background:linear-gradient(90deg, color-mix(in oklab, var(--accent) 70%, black),
+                                   var(--accent),
+                                   color-mix(in oklab, var(--accent) 90%, white));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.rsvp-sub{margin:0 0 18px; color:#fff; opacity:.9; font-size:15px}
+
+.rsvp-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px 16px;
+}
+.rsvp-grid .full{grid-column:1 / -1}
+.rsvp-label{font-family:'Playfair Display',serif; font-weight:600; letter-spacing:.04em; color:var(--accent); font-size:.95rem; margin-bottom:.25rem; display:block}
+.rsvp-input, .rsvp-select, .rsvp-text{
+  width:100%; border-radius:12px; padding:12px 14px;
+  background:rgba(255,255,255,.03); color:#fff;
+  border:1px solid color-mix(in oklab, var(--accent) 30%, #0d1b2a);
+  outline:none; transition:border .2s, box-shadow .2s;
+}
+.rsvp-text{min-height:92px; resize:vertical}
+.rsvp-input:focus, .rsvp-select:focus, .rsvp-text:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in oklab, var(--accent) 35%, transparent);
+}
+.rsvp-radio{
+  display:flex; gap:18px; align-items:center; color:#fff;
+}
+.rsvp-radio input{accent-color:var(--accent); transform:scale(1.08)}
+.rsvp-btn{
+  appearance:none; border:none; cursor:pointer;
+  padding:12px 18px; border-radius:14px;
+  background:linear-gradient(135deg, color-mix(in oklab, var(--accent) 85%, #000), var(--accent));
+  color:#0d1b2a; font-weight:700; letter-spacing:.06em;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+}
+.rsvp-btn:hover{filter:brightness(1.06)}
+.rsvp-note{margin-top:10px; color:var(--accent); font-size:.85rem; opacity:.9}
+
+@media (max-width:680px){
+  .rsvp-grid{grid-template-columns:1fr}
+}
+
+  </style>
+</head>
+<script>
+  // 👉 Cambia este número por el tuyo (con país): Guatemala = 502
+  const RSVP_WHATSAPP = "50255555555";
+
+  document.getElementById('rsvpForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const nombre = document.getElementById('rsvpNombre').value.trim();
+    const tel    = document.getElementById('rsvpTelefono').value.trim();
+    const email  = document.getElementById('rsvpEmail').value.trim();
+    const acomp  = document.getElementById('rsvpAcompanantes').value || "0";
+    const msg    = document.getElementById('rsvpMensaje').value.trim();
+    const asistRadio = document.querySelector('input[name="rsvpAsistencia"]:checked');
+    const asist = asistRadio ? asistRadio.value : "";
+
+    const error = document.getElementById('rsvpError');
+    if(!nombre || !asist){ error.style.display='inline'; return; }
+    error.style.display='none';
+
+    const texto = [
+      "🎉 *Confirmación de asistencia*",
+      `• Nombre: ${nombre}`,
+      `• Asistencia: ${asist}`,
+      `• Acompañantes: ${acomp}`,
+      tel  ? `• Teléfono: ${tel}`   : null,
+      email? `• Email: ${email}`     : null,
+      msg  ? `• Mensaje: ${msg}`     : null
+    ].filter(Boolean).join('\n');
+
+    const url = `https://wa.me/${RSVP_WHATSAPP}?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank', 'noopener');
+  });
+</script>
+<body>
+  <div id="intro">
+    <div>
+      <h1 style="font-size:3rem;margin:0 0 2rem;text-transform:uppercase;letter-spacing:4px;color:#fff;opacity:0;animation:fadeInUp 1s forwards;">Save the date</h1>
+      <button class="btn-ingresar" style="display:inline-block;padding:.75rem 2.5rem;font-size:1.1rem;letter-spacing:2px;background:rgba(255,255,255,.85);border:2px solid var(--accent);cursor:pointer;opacity:0;animation:fadeInUp 1s forwards 1s;">Ingresar</button>
+      <div class="names" style="font-family:'Allura',cursive;font-size:3.5rem;margin:2.5rem 0 0;color:#fff;opacity:0;animation:fadeInUp 1s forwards 2s;">Ana &amp; José</div>
+      <div class="date" style="font-size:1.2rem;color:#fff;margin-top:2.5rem;opacity:0;animation:fadeInUp 1s forwards 3s;">12 · Noviembre · 2025</div>
+    </div>
+  </div>
+
+  <div id="main">
+    <!-- Sección 1 -->
+    <div class="section" style="color:#fff; background:url('img/boda4.png') center/cover no-repeat;">
+      <h2 style="font-family:'Allura',cursive;font-size:4rem;margin:0;">Bienvenidos</h2>
+      <p style="max-width:100%;font-size:1.2rem;">Aquí podrás encontrar toda la información de nuestra celebración. Desliza hacia abajo para descubrir más.</p>
+    </div>
+
+    <!-- Sección 2 -->
+    <div class="section" style="background-color:var(--navy);color:var(--accent);position:relative;">
+      <img src="img/ring.png" alt="Anillos" style="width:120px;margin-bottom:1.5rem;"/>
+      <p style="max-width:100%;font-size:1.4rem;line-height:1.5;margin:0 0 2rem;">Con la bendición de Dios y el corazón lleno de amor, hemos decidido unir nuestras vidas en matrimonio.<br>Nos encantaría que nos acompañes a celebrar este día tan especial.</p>
+      <p style="font-style:italic;font-size:1.3rem;margin:0 0 3rem;">“Cordón de tres dobleces no se rompe fácilmente.”<br>Eclesiastés 4:12</p>
+      <div id="countdown" style="text-align:center;">
+        <h3 style="font-family:'Allura',cursive;font-size:3rem;margin:0 0 1rem;color:var(--accent);">Faltan</h3>
+        <div id="time" style="font-size:3rem;letter-spacing:3px;font-weight:600;color:#fff;"></div>
+        <div style="display:flex;justify-content:center;gap:2rem;font-size:.9rem;margin-top:.5rem;color:var(--accent);text-transform:uppercase;"><span>Días</span><span>Horas</span><span>Minutos</span><span>Segundos</span></div>
+      </div>
+    </div>
+
+    <!-- Separador elegante -->
+    <div style="width:100%;height:2px;background:var(--accent);margin:0 auto;"></div>
+
+<!-- Sección 3 -->
+<div class="section" style="
+  background:
+    linear-gradient(180deg, var(--navy) 0%, var(--navy) 90%, #ffffff 100%);
+  color:#fff;
+">
+
+  <!-- Ceremonia -->
+  <h2 style="font-family:'Allura',cursive; font-size:4rem; margin:0 0 1.5rem;">Ceremonia</h2>
+  <img src="img/church.png" alt="Iglesia La Merced" style="width:120px; margin-bottom:1rem;">
+  <p style="font-size:1.3rem; margin:0 0 1rem;">6:00&nbsp;PM · Iglesia La&nbsp;Merced</p>
+  <a href="https://maps.google.com/?q=Iglesia+La+Merced+Antigua+Guatemala"
+     style="display:inline-block; padding:.6rem 1.6rem; border:2px solid var(--accent);
+            color:#fff; text-decoration:none; letter-spacing:1px; margin-bottom:2rem;">
+     Ver en mapa
+  </a>
+
+  <!-- Recepción -->
+  <h2 style="font-family:'Allura',cursive; font-size:4rem; margin:2rem 0 1.5rem;">Recepción</h2>
+  <img src="img/brindis.png" alt="Salón Capuchinas" style="width:120px; margin-bottom:1rem;">
+  <p style="font-size:1.3rem; margin:0 0 1rem;">7:30&nbsp;PM · Salón Capuchinas</p>
+  <a href="https://maps.google.com/?q=Convento+de+Capuchinas+Antigua+Guatemala"
+     style="display:inline-block; padding:.6rem 1.6rem; border:2px solid var(--accent);
+            color:#fff; text-decoration:none; letter-spacing:1px;">
+     Ver en mapa
+  </a>
+</div>
+
+<!-- Sección 4 -->
+<div class="section" style="
+  color:#ffffff;  /* texto oscuro sobre fondo claro */
+  background:
+    linear-gradient(0deg, rgba(255,255,255,0) 65%, #ffffff 100%), /* difuminado blanco arriba */
+    url('img/boda6.png') center/cover no-repeat;
+">
+  <!-- Vestimenta -->
+  <h2 style="font-family:'Allura',cursive; font-size:4rem; margin:0 0 1.5rem;">Vestimenta</h2>
+
+  <!-- Ícono dress code -->
+  <!-- <img src="img/dresscode.png" alt="Dress Code" style="width:120px; margin-bottom:1rem;"> -->
+
+  <!-- Indicaciones -->
+  <p style="font-weight:700; font-size:1.3rem; margin:0 0 1rem;">Formal de noche</p>
+  <p style="font-size:1.1rem; margin:0;">
+    Este día el blanco es para la novia, el rojo para los pétalos y el negro para la noche.<br>
+    Solo tres colores prohibidos, pero millones para brillar. ¡Tú elige uno!
+  </p>
+</div>
+    <!-- Sección 5 -->
+    <div class="section" style="background-color:var(--navy);color:var(--accent);position:relative;">
+     <!-- Itinerario AQUI -->
+<div class="section-itinerario"></div>
+     <div class="it-card">
+  <h2 class="it-heading">Itinerario</h2>
+
+  <section class="it-grid" aria-label="Itinerario de boda">
+    <!-- Ceremonia -->
+    <div class="it-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 3l3 2v3h3v4h2v8h-6v-5H10v5H4v-8h2V8h3V5l3-2z"/><path d="M12 11v-2"/></svg>
+    </div>
+    <div class="it-content">
+      <h3>Ceremonia</h3>
+      <p class="it-time">5:00 P.M.</p>
+    </div>
+
+    <!-- Recepción -->
+    <div class="it-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M5 3h6c0 3-2 5-5 5v6a3 3 0 003 3v2H6v2"/>
+        <path d="M13 3h6c0 3-2 5-5 5v6a3 3 0 003 3v2h-3v2"/>
+      </svg>
+    </div>
+    <div class="it-content">
+      <h3>Recepción</h3>
+      <p class="it-time">6:00 P.M.</p>
+    </div>
+
+    <!-- Cena -->
+    <div class="it-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="14" r="4"/><circle cx="15" cy="10" r="4"/></svg>
+    </div>
+    <div class="it-content">
+      <h3>Cena</h3>
+      <p class="it-time">8:00 P.M.</p>
+    </div>
+
+    <!-- Primer baile -->
+    <div class="it-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M8 7a2 2 0 114 0 2 2 0 01-4 0z"/><path d="M6 21c3-6 6-7 10-7M10 9l2 3 3 1"/></svg>
+    </div>
+    <div class="it-content">
+      <h3>Primer baile</h3>
+      <p class="it-time">9:00 P.M.</p>
+    </div>
+
+    <!-- Fiesta -->
+    <div class="it-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><path d="M12 6v12M6 12h12M8.1 8.1l7.8 7.8M15.9 8.1l-7.8 7.8"/></svg>
+    </div>
+    <div class="it-content">
+      <h3>Fiesta</h3>
+      <p class="it-time">9:30 P.M.</p>
+    </div>
+  </section>
+
+  <p class="it-note">* Horarios sugetos a cambios.</p>
+</div>
+    </div>
+    <!-- Sección 6 -->
+<div class="section" style="background-color:var(--navy);color:var(--accent);position:relative;">
+  <div class="rsvp-wrap">
+    <div class="rsvp-card">
+      <h2 class="rsvp-heading">Confirma tu asistencia</h2>
+      <p class="rsvp-sub">¡Nos hará mucha ilusión tu respuesta! Completa tus datos y envíanos tu confirmación por WhatsApp.</p>
+
+      <form id="rsvpForm" class="rsvp-grid">
+        <div class="full">
+          <label class="rsvp-label" for="rsvpNombre">Nombre completo *</label>
+          <input id="rsvpNombre" class="rsvp-input" type="text" required placeholder="Ej. Ana López" />
+        </div>
+
+        <div>
+          <label class="rsvp-label" for="rsvpTelefono">Teléfono</label>
+          <input id="rsvpTelefono" class="rsvp-input" type="tel" placeholder="+502 5XX XXX XXX" />
+        </div>
+
+        <div>
+          <label class="rsvp-label" for="rsvpEmail">Email (opcional)</label>
+          <input id="rsvpEmail" class="rsvp-input" type="email" placeholder="tucorreo@dominio.com" />
+        </div>
+
+        <div>
+          <label class="rsvp-label" for="rsvpAcompanantes">Acompañantes</label>
+          <input id="rsvpAcompanantes" class="rsvp-input" type="number" min="0" value="0" />
+        </div>
+
+        <div class="full">
+          <span class="rsvp-label">¿Asistirás? *</span>
+          <div class="rsvp-radio">
+            <label><input type="radio" name="rsvpAsistencia" value="Sí" required /> Sí</label>
+            <label><input type="radio" name="rsvpAsistencia" value="No" /> No</label>
+            <label><input type="radio" name="rsvpAsistencia" value="Por confirmar" /> Por confirmar</label>
+          </div>
+        </div>
+
+        <div class="full">
+          <label class="rsvp-label" for="rsvpMensaje">Mensaje (opcional)</label>
+          <textarea id="rsvpMensaje" class="rsvp-text" placeholder="Déjanos alguna nota, alergias, etc."></textarea>
+        </div>
+
+        <div class="full" style="display:flex;gap:12px;align-items:center;">
+          <button type="submit" class="rsvp-btn">Enviar</button>
+          <span id="rsvpError" style="color:#ffb0b0;display:none;font-size:.9rem;">Completa nombre y asistencia.</span>
+        </div>
+      </form>
+
+      <div class="rsvp-note">Si prefieres, puedes confirmar respondiendo este mensaje o llamándonos.</div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+  <script>
+    document.querySelector('.btn-ingresar').addEventListener('click',()=>{document.getElementById('intro').classList.add('hidden');setTimeout(()=>{document.getElementById('intro').style.display='none';},600);document.getElementById('main').style.display='block';window.scrollTo({top:0});});
+    const targetDate=new Date('2025-12-31T00:00:00');function updateCountdown(){const now=new Date();let diff=targetDate-now;diff=Math.max(diff,0);const d=Math.floor(diff/864e5);const h=Math.floor(diff/36e5)%24;const m=Math.floor(diff/6e4)%60;const s=Math.floor(diff/1e3)%60;document.getElementById('time').textContent=`${String(d).padStart(3,'0')}:${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}updateCountdown();setInterval(updateCountdown,1e3);
+  </script>
+</body>
+</html>
